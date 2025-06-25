@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Hello Webex User</title>
+  <script src="https://binaries.webex.com/static-content-pipeline/webex-embedded-app-sdk/latest/webex-embedded-app-sdk.min.js"></script>
+  <style>
+    body { font-family: sans-serif; padding: 2em; }
+  </style>
+</head>
+<body>
+  <h1 id="greeting">Loading...</h1>
+
+  <script>
+    window.onload = async () => {
+      try {
+        await webex.ready();
+        const context = await webex.getContext();
+        const username = context.user?.displayName || 'Guest';
+        document.getElementById('greeting').innerText = `Hello ${username}`;
+      } catch (e) {
+        console.error('Error loading context:', e);
+        document.getElementById('greeting').innerText = 'Hello Guest';
+      }
+    };
+  </script>
+</body>
+</html>
